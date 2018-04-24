@@ -1,13 +1,15 @@
 package com;
 
 import java.util.ArrayList;
+import java.util.List;
+
 import com.google.gson.GsonBuilder;
 
 public class NoobChain 
 {
 	
-	public static ArrayList<Block> blockchain = new ArrayList<Block>(); 
-	public static int difficulty = 1;
+	protected static List<Block> blockchain = new ArrayList<Block>(); 
+	private static int difficulty = 1;
 	
     public static void main( String[] args )
     {
@@ -15,11 +17,11 @@ public class NoobChain
 		System.out.println("Trying to Mine block 1... ");
 		blockchain.get(0).mineBlock(difficulty);
 		
-		blockchain.add(new Block("Second Block", blockchain.get(blockchain.size() - 1).hash));
+		blockchain.add(new Block("Second Block", blockchain.get(blockchain.size() - 1).getHash()));
 		System.out.println("Trying to Mine block 2... ");
 		blockchain.get(1).mineBlock(difficulty);
 		
-		blockchain.add(new Block("Third Block", blockchain.get(blockchain.size() - 1).hash));
+		blockchain.add(new Block("Third Block", blockchain.get(blockchain.size() - 1).getHash()));
 		System.out.println("Trying to Mine block 3... ");
 		blockchain.get(2).mineBlock(difficulty);
 		
@@ -42,14 +44,14 @@ public class NoobChain
     		
     		//compare registered hash and calculated hash:
     		
-    		if(!currentBlock.hash.equals(currentBlock.calculateHash()) ){
+    		if(!currentBlock.getHash().equals(currentBlock.calculateHash()) ){
     			System.out.println("Current Hashes not equal");			
     			return false;
     		}
     		
     		//compare previous hash and registered previous hash
     		
-    		if(!previousBlock.hash.equals(currentBlock.previousHash) ) {
+    		if(!previousBlock.getHash().equals(currentBlock.getPreviousHash()) ) {
     			System.out.println("Previous Hashes not equal");
     			return false;
     		}

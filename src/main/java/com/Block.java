@@ -4,8 +4,8 @@ import java.util.Date;
 
 public class Block {
 	
-	public String hash;
-	public String previousHash;
+	private String hash;
+	private String previousHash;
 	private String data; // our data will be a simple message
 	private long timeStamp;
 	private int nonce;
@@ -19,9 +19,8 @@ public class Block {
 	}
 	
 	public String calculateHash() {
-		String calculatedHash = StringUtil.applySha256(
+		return StringUtil.applySha256(
 				previousHash + Long.toString(timeStamp) + data);
-		return calculatedHash;
 	}
 	
 	public void mineBlock(int difficulty) {
@@ -33,4 +32,13 @@ public class Block {
 		System.out.println("Block Mined!!! : " + hash);
 	}
 
+	public String getHash() {
+		return hash;
+	}
+
+	public String getPreviousHash() {
+		return previousHash;
+	}
+
+	
 }
